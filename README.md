@@ -1,45 +1,104 @@
-# MERN Stack Blog Backend
+# Lifescroll - MERN Stack Blog Application
 
-A complete backend API for a blog application built with Node.js, Express, and MongoDB.
+A complete full-stack blog application built with MongoDB, Express.js, React, and Node.js (MERN Stack).
 
 ## Features
 
-- **User Authentication**: JWT-based authentication with register, login, and profile endpoints
-- **Post Management**: Full CRUD operations for blog posts
-- **Comment System**: Nested comments with replies
+- **User Authentication**: JWT-based authentication with register, login, and profile management
+- **Post Management**: Full CRUD operations for blog posts with image upload
+- **Comment System**: Nested comments with replies functionality
 - **Like System**: Users can like/unlike posts
-- **Admin Features**: Admin users have additional permissions
-- **Security**: Password hashing with bcrypt, JWT tokens, input validation
+- **Image Upload**: Automatic image upload and preview for posts
+- **Responsive Design**: Modern, mobile-friendly UI
+- **Real-time Updates**: Dynamic content updates
+- **Security**: Password hashing, JWT tokens, input validation
 
 ## Tech Stack
 
+### Backend
 - Node.js
 - Express.js
 - MongoDB with Mongoose
 - JWT for authentication
 - bcrypt for password hashing
-- express-validator for input validation
+- Multer for file uploads
 
-## Installation
+### Frontend
+- React 18
+- React Router DOM
+- Axios for API calls
+- React Toastify for notifications
+- React Quill for rich text editing
+- Moment.js for date formatting
 
-1. Clone the repository
-2. Install dependencies:
+## Installation & Setup
+
+### Prerequisites
+- Node.js (v14 or higher)
+- MongoDB (local or MongoDB Atlas)
+- Git
+
+### Backend Setup
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Niharika011205/lifescroll.git
+   cd lifescroll
+   ```
+
+2. Install backend dependencies:
    ```bash
    npm install
    ```
 
-3. Create a `.env` file with the following variables:
-   ```
-   PORT=5000
-   MONGODB_URI=mongodb://localhost:27017/mern-blog
+3. Create a `.env` file in the root directory:
+   ```env
+   PORT=5001
+   MONGODB_URI=your_mongodb_connection_string
    JWT_SECRET=your_jwt_secret_key_here
    NODE_ENV=development
    ```
 
-4. Start the server:
+4. Start the backend server:
    ```bash
-   npm run dev
+   npm start
    ```
+   Backend will run on http://localhost:5001
+
+### Frontend Setup
+
+1. Navigate to frontend directory:
+   ```bash
+   cd frontend
+   ```
+
+2. Install frontend dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the React development server:
+   ```bash
+   npm start
+   ```
+   Frontend will run on http://localhost:3003
+
+### Quick Start (Both servers)
+
+1. **Terminal 1** (Backend):
+   ```bash
+   npm start
+   ```
+
+2. **Terminal 2** (Frontend):
+   ```bash
+   cd frontend
+   npm start
+   ```
+
+Your application will be available at:
+- **Frontend**: http://localhost:3003
+- **Backend API**: http://localhost:5001
 
 ## API Endpoints
 
@@ -91,18 +150,36 @@ curl -X POST http://localhost:5000/api/posts \
 ## Project Structure
 
 ```
-├── models/
-│   ├── User.js          # User model
-│   ├── Post.js          # Post model
-│   └── Comment.js       # Comment model
-├── routes/
-│   ├── auth.js          # Authentication routes
-│   ├── posts.js         # Post routes
-│   └── comments.js      # Comment routes
-├── middleware/
-│   └── auth.js          # Authentication middleware
-├── server.js            # Main server file
-├── package.json
+lifescroll/
+├── backend/                 # Backend API (Alternative structure)
+├── frontend/               # React frontend application
+│   ├── public/
+│   ├── src/
+│   │   ├── components/     # React components
+│   │   │   ├── Auth/       # Login, Register components
+│   │   │   ├── Posts/      # Post-related components
+│   │   │   ├── Comments/   # Comment components
+│   │   │   ├── Layout/     # Navigation, Layout components
+│   │   │   └── Pages/      # Home, Profile pages
+│   │   ├── context/        # React Context (Auth)
+│   │   ├── utils/          # Utility functions
+│   │   └── App.js          # Main App component
+│   └── package.json
+├── models/                 # MongoDB models
+│   ├── User.js
+│   ├── Post.js
+│   └── Comment.js
+├── routes/                 # Express routes
+│   ├── auth.js
+│   ├── posts.js
+│   ├── comments.js
+│   └── admin.js
+├── middleware/             # Express middleware
+│   ├── auth.js
+│   └── upload.js
+├── uploads/                # Uploaded images
+├── server.js               # Main server file
+├── .env                    # Environment variables
 └── README.md
 ```
 
