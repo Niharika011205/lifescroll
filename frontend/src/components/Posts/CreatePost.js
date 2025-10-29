@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { getImageUrl } from '../../utils/imageUtils';
+import { API_BASE_URL } from '../../config';
 
 const CreatePost = () => {
   const [formData, setFormData] = useState({
@@ -42,7 +43,7 @@ const CreatePost = () => {
       formDataUpload.append('image', file);
 
       try {
-        const res = await axios.post('/api/posts/upload-image', formDataUpload, {
+        const res = await axios.post(`${API_BASE_URL}/api/posts/upload-image`, formDataUpload, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
@@ -69,7 +70,7 @@ const CreatePost = () => {
     formDataUpload.append('image', imageFile);
 
     try {
-      const res = await axios.post('/api/posts/upload-image', formDataUpload, {
+      const res = await axios.post(`${API_BASE_URL}/api/posts/upload-image`, formDataUpload, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -108,7 +109,7 @@ const CreatePost = () => {
         status
       };
 
-      const res = await axios.post('/api/posts', postData);
+      const res = await axios.post(`${API_BASE_URL}/api/posts`, postData);
       toast.success('Post created successfully!');
       navigate(`/post/${res.data.post._id}`);
     } catch (error) {

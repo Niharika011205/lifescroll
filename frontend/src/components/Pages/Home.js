@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import PostCard from '../Posts/PostCard';
+import { API_BASE_URL } from '../../config';
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
@@ -16,7 +17,7 @@ const Home = () => {
   const fetchPosts = async (page = 1) => {
     setLoading(true);
     try {
-      const res = await axios.get(`/api/posts?page=${page}&limit=5`);
+      const res = await axios.get(`${API_BASE_URL}/api/posts?page=${page}&limit=5`);
       setPosts(res.data.posts);
       setPagination(res.data.pagination);
     } catch (error) {

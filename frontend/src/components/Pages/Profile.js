@@ -4,6 +4,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import PostCard from '../Posts/PostCard';
 import moment from 'moment';
+import { API_BASE_URL } from '../../config';
 
 const Profile = () => {
   const { user } = useAuth();
@@ -27,7 +28,7 @@ const Profile = () => {
   const fetchUserPosts = async (page = 1) => {
     setLoading(true);
     try {
-      const res = await axios.get(`/api/posts/user/${user.id}?page=${page}&limit=5`);
+      const res = await axios.get(`${API_BASE_URL}/api/posts/user/${user.id}?page=${page}&limit=5`);
       setUserPosts(res.data.posts);
       setPagination(res.data.pagination);
     } catch (error) {
@@ -39,7 +40,7 @@ const Profile = () => {
   const fetchUserStats = async () => {
     try {
       // Calculate stats from user posts
-      const res = await axios.get(`/api/posts/user/${user.id}?limit=1000`);
+      const res = await axios.get(`${API_BASE_URL}/api/posts/user/${user.id}?limit=1000`);
       const posts = res.data.posts;
       
       const totalPosts = posts.length;

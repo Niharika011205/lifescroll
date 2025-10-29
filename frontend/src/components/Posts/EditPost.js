@@ -4,6 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import { getImageUrl } from '../../utils/imageUtils';
+import { API_BASE_URL } from '../../config';
 
 const EditPost = () => {
   const { id } = useParams();
@@ -29,7 +30,7 @@ const EditPost = () => {
 
   const fetchPost = async () => {
     try {
-      const res = await axios.get(`/api/posts/${id}`);
+      const res = await axios.get(`${API_BASE_URL}/api/posts/${id}`);
       const post = res.data;
       
       // Check if user can edit this post
@@ -77,7 +78,7 @@ const EditPost = () => {
       formDataUpload.append('image', file);
 
       try {
-        const res = await axios.post('/api/posts/upload-image', formDataUpload, {
+        const res = await axios.post(`${API_BASE_URL}/api/posts/upload-image`, formDataUpload, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }
@@ -104,7 +105,7 @@ const EditPost = () => {
     formDataUpload.append('image', imageFile);
 
     try {
-      const res = await axios.post('/api/posts/upload-image', formDataUpload, {
+      const res = await axios.post(`${API_BASE_URL}/api/posts/upload-image`, formDataUpload, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }
@@ -137,7 +138,7 @@ const EditPost = () => {
         status
       };
 
-      await axios.put(`/api/posts/${id}`, postData);
+      await axios.put(`${API_BASE_URL}/api/posts/${id}`, postData);
       toast.success('Post updated successfully!');
       navigate(`/post/${id}`);
     } catch (error) {

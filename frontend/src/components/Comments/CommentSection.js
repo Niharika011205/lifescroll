@@ -4,6 +4,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import CommentForm from './CommentForm';
 import CommentList from './CommentList';
+import { API_BASE_URL } from '../../config';
 
 const CommentSection = ({ postId }) => {
   const { isAuthenticated } = useAuth();
@@ -17,7 +18,7 @@ const CommentSection = ({ postId }) => {
 
   const fetchComments = async (page = 1) => {
     try {
-      const res = await axios.get(`/api/comments/post/${postId}?page=${page}`);
+      const res = await axios.get(`${API_BASE_URL}/api/comments/post/${postId}?page=${page}`);
       setComments(res.data.comments);
       setPagination(res.data.pagination);
     } catch (error) {

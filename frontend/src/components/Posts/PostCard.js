@@ -5,6 +5,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import moment from 'moment';
 import { getImageUrl } from '../../utils/imageUtils';
+import { API_BASE_URL } from '../../config';
 
 const PostCard = ({ post, onPostUpdate }) => {
   const { user, isAuthenticated } = useAuth();
@@ -22,7 +23,7 @@ const PostCard = ({ post, onPostUpdate }) => {
 
     setLoading(true);
     try {
-      const res = await axios.post(`/api/posts/${post._id}/like`);
+      const res = await axios.post(`${API_BASE_URL}/api/posts/${post._id}/like`);
       setLiked(res.data.liked);
       setLikesCount(res.data.likesCount);
       toast.success(res.data.message);
@@ -35,7 +36,7 @@ const PostCard = ({ post, onPostUpdate }) => {
   const handleDelete = async () => {
     if (window.confirm('Are you sure you want to delete this post?')) {
       try {
-        await axios.delete(`/api/posts/${post._id}`);
+        await axios.delete(`${API_BASE_URL}/api/posts/${post._id}`);
         toast.success('Post deleted successfully');
         if (onPostUpdate) onPostUpdate();
       } catch (error) {

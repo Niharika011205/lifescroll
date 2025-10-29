@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
+import { API_BASE_URL } from '../../config';
 
 const CommentForm = ({ postId, parentCommentId, onCommentAdded, onCancel }) => {
   const [content, setContent] = useState('');
@@ -23,7 +24,7 @@ const CommentForm = ({ postId, parentCommentId, onCommentAdded, onCancel }) => {
         parentCommentId
       };
 
-      const res = await axios.post('/api/comments', commentData);
+      const res = await axios.post(`${API_BASE_URL}/api/comments`, commentData);
       toast.success('Comment added successfully!');
       setContent('');
       if (onCommentAdded) {

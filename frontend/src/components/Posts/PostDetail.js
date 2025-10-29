@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import moment from 'moment';
 import CommentSection from '../Comments/CommentSection';
 import { getImageUrl } from '../../utils/imageUtils';
+import { API_BASE_URL } from '../../config';
 
 const PostDetail = () => {
   const { id } = useParams();
@@ -23,7 +24,7 @@ const PostDetail = () => {
 
   const fetchPost = async () => {
     try {
-      const res = await axios.get(`/api/posts/${id}`);
+      const res = await axios.get(`${API_BASE_URL}/api/posts/${id}`);
       setPost(res.data);
       setLiked(res.data.likes?.some(like => like.user === user?.id) || false);
       setLikesCount(res.data.likesCount || 0);
@@ -41,7 +42,7 @@ const PostDetail = () => {
     }
 
     try {
-      const res = await axios.post(`/api/posts/${id}/like`);
+      const res = await axios.post(`${API_BASE_URL}/api/posts/${id}/like`);
       setLiked(res.data.liked);
       setLikesCount(res.data.likesCount);
       toast.success(res.data.message);
@@ -53,7 +54,7 @@ const PostDetail = () => {
   const handleDelete = async () => {
     if (window.confirm('Are you sure you want to delete this post?')) {
       try {
-        await axios.delete(`/api/posts/${id}`);
+        await axios.delete(`${API_BASE_URL}/api/posts/${id}`);
         toast.success('Post deleted successfully');
         navigate('/');
       } catch (error) {

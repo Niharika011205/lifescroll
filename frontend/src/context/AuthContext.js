@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useReducer, useEffect } from 'react';
 import axios from 'axios';
+import { API_BASE_URL } from '../config';
 
 const AuthContext = createContext();
 
@@ -66,7 +67,7 @@ export const AuthProvider = ({ children }) => {
         if (localStorage.token) {
             setAuthToken(localStorage.token);
             try {
-                const res = await axios.get('/api/auth/profile');
+                const res = await axios.get(`${API_BASE_URL}/api/auth/profile`);
                 dispatch({
                     type: 'USER_LOADED',
                     payload: res.data.user
@@ -82,7 +83,7 @@ export const AuthProvider = ({ children }) => {
     // Register user
     const register = async (userData) => {
         try {
-            const res = await axios.post('/api/auth/register', userData);
+            const res = await axios.post(`${API_BASE_URL}/api/auth/register`, userData);
             dispatch({
                 type: 'REGISTER_SUCCESS',
                 payload: res.data
@@ -101,7 +102,7 @@ export const AuthProvider = ({ children }) => {
     // Login user
     const login = async (userData) => {
         try {
-            const res = await axios.post('/api/auth/login', userData);
+            const res = await axios.post(`${API_BASE_URL}/api/auth/login`, userData);
             dispatch({
                 type: 'LOGIN_SUCCESS',
                 payload: res.data

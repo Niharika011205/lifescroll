@@ -4,6 +4,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import moment from 'moment';
 import CommentForm from './CommentForm';
+import { API_BASE_URL } from '../../config';
 
 const CommentItem = ({ comment, onCommentDeleted, postId, level = 0 }) => {
   const { user } = useAuth();
@@ -15,7 +16,7 @@ const CommentItem = ({ comment, onCommentDeleted, postId, level = 0 }) => {
   const handleDelete = async () => {
     if (window.confirm('Are you sure you want to delete this comment?')) {
       try {
-        await axios.delete(`/api/comments/${comment._id}`);
+        await axios.delete(`${API_BASE_URL}/api/comments/${comment._id}`);
         toast.success('Comment deleted successfully');
         onCommentDeleted(comment._id);
       } catch (error) {
