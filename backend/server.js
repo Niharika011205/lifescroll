@@ -9,8 +9,16 @@ dotenv.config();
 const app = express();
 
 // Middleware
+// CORS configuration for both development and production
+const allowedOrigins = [
+    'http://localhost:3003', 
+    'http://localhost:3000',
+    'https://lifescroll-3.onrender.com', // Production frontend URL
+    process.env.FRONTEND_URL,
+].filter(Boolean); // Remove undefined values
+
 app.use(cors({
-    origin: ['http://localhost:3003', 'http://localhost:3000'],
+    origin: allowedOrigins,
     credentials: true
 }));
 app.use(express.json());
