@@ -69,7 +69,10 @@ router.post('/upload-image', auth, upload.single('image'), (req, res) => {
       return res.status(400).json({ message: 'No image file provided' });
     }
 
-    const imageUrl = `http://localhost:8080/uploads/posts/${req.file.filename}`;
+    // Use environment variable for base URL or default to localhost:5001
+    const baseUrl = process.env.BASE_URL || 'http://localhost:5001';
+    const imageUrl = `${baseUrl}/uploads/${req.file.filename}`;
+    
     res.json({
       message: 'Image uploaded successfully',
       imageUrl: imageUrl
