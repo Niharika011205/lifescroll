@@ -1,5 +1,11 @@
 # Lifescroll - MERN Stack Blog Application
 
+## 🌐 Live Demo
+
+🚀 **Live Link of the Life Scroll:**  
+[https://lifescroll-3.onrender.com/](https://lifescroll-3.onrender.com/)
+
+
 A complete full-stack blog application built with MongoDB, Express.js, React, and Node.js (MERN Stack).
 
 ## Features
